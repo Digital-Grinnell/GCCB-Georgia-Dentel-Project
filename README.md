@@ -1,3 +1,16 @@
+# GCCB-Georgia-Dental-Project
+
+This project's `main` branch builds https://calm-ocean-061ff161e.1.azurestaticapps.net/ using Azure and GitHub Actions when updated.  
+  
+
+<div style="border: 2px solid black; padding: 12px; border-radius: 6px; background-color: #f9f9f9; font-size: 1.3em; color: red; margin: 3em 1em; text-align: center;">
+<strong>What follows is from the parent project. It may include irrelevant or outdated information!</strong>
+</div>
+
+
+
+
+
 # Digital-Grinnell/collectionbuilder-csv
 
 This is a `fork` of [CollectionBuilder/collectionbuilder-csv](https://github.com/CollectionBuilder/collectionbuilder-csv) with added GC-specific additions from Mark M., Libby C., and others.  
