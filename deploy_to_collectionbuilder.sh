@@ -29,10 +29,10 @@ fi
 
 # Copy the updated CSV file
 echo "Copying CSV file to _data directory..."
-cp "/Users/mcfatem/GitHub/manage-digital-ingest-flet-CollectionBuilder/storage/temp/file_selector_20251205_214910_4d801a7e/gdp-oh-metadata-fields-11-23-25_20251205_214910.csv" "_data/gdp-oh-metadata-fields-11-23-25_20251205_214910.csv"
+cp "/Users/mcfatem/GitHub/manage-digital-ingest-flet-CollectionBuilder/storage/temp/file_selector_20251205_232713_924e1890/gdp-oh-metadata-fields-11-23-25_20251205_232713.csv" "_data/gdp-oh-metadata-fields-11-23-25_20251205_232713.csv"
 
 if [ $? -eq 0 ]; then
-    echo "✓ CSV file copied successfully: _data/gdp-oh-metadata-fields-11-23-25_20251205_214910.csv"
+    echo "✓ CSV file copied successfully: _data/gdp-oh-metadata-fields-11-23-25_20251205_232713.csv"
 else
     echo "✗ Failed to copy CSV file"
     exit 1
@@ -47,7 +47,7 @@ fi
 echo ""
 echo "Copying transcript CSV files to _data/transcripts/..."
 TRANSCRIPT_COUNT=0
-for csv_file in "/Users/mcfatem/GitHub/manage-digital-ingest-flet-CollectionBuilder/storage/temp/file_selector_20251205_214910_4d801a7e/TRANSCRIPTS"/*.csv; do
+for csv_file in "/Users/mcfatem/GitHub/manage-digital-ingest-flet-CollectionBuilder/storage/temp/file_selector_20251205_232713_924e1890/TRANSCRIPTS"/*.csv; do
     if [ -f "$csv_file" ] || [ -L "$csv_file" ]; then
         # Use -L flag to follow symbolic links and copy the actual file
         cp -L "$csv_file" "_data/transcripts/"
@@ -73,15 +73,15 @@ if grep -q "^metadata:" "_config.yml"; then
     echo "  (Backup created: _config.yml.backup)"
     
     # Update the metadata line
-    sed -i.tmp 's/^metadata:.*/metadata: gdp-oh-metadata-fields-11-23-25_20251205_214910/' _config.yml
+    sed -i.tmp 's/^metadata:.*/metadata: gdp-oh-metadata-fields-11-23-25_20251205_232713/' _config.yml
     rm -f _config.yml.tmp
     
     echo "✓ Updated metadata key in _config.yml"
-    echo "  New value: metadata: gdp-oh-metadata-fields-11-23-25_20251205_214910"
+    echo "  New value: metadata: gdp-oh-metadata-fields-11-23-25_20251205_232713"
 else
     echo "⚠ Warning: 'metadata:' key not found in _config.yml"
     echo "  Please manually add the following line to _config.yml:"
-    echo "  metadata: gdp-oh-metadata-fields-11-23-25_20251205_214910"
+    echo "  metadata: gdp-oh-metadata-fields-11-23-25_20251205_232713"
 fi
 
 echo ""
