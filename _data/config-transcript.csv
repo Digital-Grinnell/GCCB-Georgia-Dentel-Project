@@ -1,6 +1,7 @@
 field,display_name
 description,Description
 date,Date
+interview_date,Interview Date
 location,Location
 interviewee,Interviewer
 interviewee,Interviewer
