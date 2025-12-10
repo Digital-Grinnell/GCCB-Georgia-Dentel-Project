@@ -1,4 +1,4 @@
-# GCCB-Georgia-Dental-Project
+# GCCB-Georgia-Dentel-Project
 
 This project's `main` branch builds https://calm-ocean-061ff161e.1.azurestaticapps.net/ using Azure and GitHub Actions when updated.  
   
