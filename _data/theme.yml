@@ -13,7 +13,7 @@ home-page-visualization: true # true / false, if true, the visualization will ap
 # Note: if you are using the CB base layout as determined above, the featured image defined here will show up as the large image at top of the home page
 # featured image is used in home page banner and in meta markup to represent the collection
 # use either an objectid (from an item in this collect), a relative location of an image in this repo, or a full url to an image elsewhere
-featured-image: https://collectionbuilder.blob.core.windows.net/config/d8_hero_burling_exterior_brighter_0.png
+featured-image: assets/img/Georgia-Dentel-header-image.png
 # optional: add extra padding around collection title for a larger image feature. 
 home-title-y-padding: 5em # the margin from the top your title portion will appear.
 # optional: change position of background image, center, top, bottom
