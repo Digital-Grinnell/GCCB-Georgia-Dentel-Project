@@ -176,6 +176,34 @@ Note that oral history objects (any audio or video objects with transcription) n
 
 Final oral history note:  Your `transcript` filenames must EXACTLY match the names of the CSV files found in the `_data/transcripts` directory.  Don't put these files anywhere else, don't store them remotely and specify URLs, and don't include the `path` in your metadata file's `transcript-file` column, just the name of the file (with its extension) as it appears in your `_data/transcripts` directory.     
 
+## Troubleshooting Transcripts
+
+### Transcript CSV File Format
+
+If a transcript is not displaying correctly, check that the CSV file in `_data/transcripts/` uses the correct header format. CollectionBuilder expects **lowercase** field names:
+
+```csv
+timestamp,speaker,words
+```
+
+**Common Issues:**
+- ❌ Capitalized headers: `Timestamp,Speaker,Transcript`
+- ❌ Wrong field name: `Transcript` instead of `words`
+- ✅ Correct format: `timestamp,speaker,words`
+
+The CollectionBuilder transcript templates reference these specific field names:
+- `item.timestamp` - The timestamp for the transcript line
+- `item.speaker` - The name of the speaker
+- `item.words` - The actual transcript text
+
+**Example Fix (December 2024):**
+The transcript file `dg_1752254695.csv` was not displaying because it had capitalized headers (`Timestamp,Speaker,Transcript`). Changing the first line to lowercase field names (`timestamp,speaker,words`) resolved the issue.
+
+Additional optional fields supported by the template:
+- `tags` - Semicolon-separated tags for filtering
+- `highlight` - Mark important sections
+- `timelink` - Custom time linking
+
 ## Suggested Metadata CSV Column Headings
 
 The following CSV column headings were pulled from the `_data/grinnell-CB-CSV-demo.csv` file in this repository.  This is a `COMPLETE` list of fields that makes ALL features and options possible, including 6 fields for whatever you want!  Have fun with it!    
