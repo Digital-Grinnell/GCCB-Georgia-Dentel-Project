@@ -1,7 +1,33 @@
 # GCCB-Georgia-Dentel-Project
 
 This project's `main` branch builds https://calm-ocean-061ff161e.1.azurestaticapps.net/ using Azure and GitHub Actions when updated.  
-  
+
+The Wordpress site for the Georgia Dentel project can be found at https://concertshistory.sites.grinnell.edu/. 
+
+## Azure Blob Storage vs. DigitalOcean Spaces
+
+In January 2026 it was identified that audio playback of interviews stored in Azure Blob Storage were not performing properly. The issue was traced back to the way in which Azure serves the files.  This Slack conversation captures most of the details...  
+
+```
+The problem is with the location in which the MP3 is served. I went through a conversation with Claude and this is it's summation:MP3 Seeking Fails in Chrome: Range Request IssueThe ProblemWhen clicking timestamps to jump to specific points in an audio file, Chrome starts playback at 0:00 instead of the requested time. Firefox may work inconsistently, sometimes requiring multiple clicks to reach the correct position.Root CauseChrome requires HTTP Range Requests to seek within audio files. This allows the browser to request specific byte ranges (e.g., "give me bytes 50000-51000") rather than downloading the entire file from the beginning.For range requests to work, the server must:Include Accept-Ranges: bytes in response headersRespond to range requests with 206 Partial Content status (not 200 OK)Some hosting configurations—particularly older Azure Blob Storage setups—don't support range requests properly. Without this support, Chrome cannot seek, and your timestamp links won't work.How to Check Your Audio HostingRun this command in your terminal, replacing the URL with your audio file:curl -I -H "Range: bytes=0-1000" "https://your-server.com/path/to/audio.mp3"Working response (supports seeking):HTTP/1.1 206 Partial Content
+Accept-Ranges: bytes
+Content-Range: bytes 0-1000/186476716
+Content-Length: 1001Broken response (seeking will fail in Chrome):HTTP/1.1 200 OK
+Content-Length: 186476716If you see 200 OK with the full file size instead of 206 Partial Content, range requests aren't working.SolutionsOption 1: Fix the Server ConfigurationIf using Azure Blob Storage, the issue may be an outdated API version. Re-uploading files through the Azure Portal or Azure Storage Explorer with current settings often resolves this.Option 2: Host Audio on GitHubGitHub Pages fully supports range requests. You can keep your static site on its current host while serving audio from GitHub:Create a repository for audio files (or use an objects branch in your existing repo)Enable GitHub Pages on that repo/branchUpdate your audio src URLs to point to the GitHub Pages URLExample:<audio id="audio-player" src="https://yourusername.github.io/audio-repo/filename.mp3">Option 3: Use a CDNMost CDNs (Cloudflare, AWS CloudFront, etc.) support range requests by default and can sit in front of your existing storage.Testing the FixAfter moving files or updating server configuration, run the curl test again and confirm you see 206 Partial Content. Then test timestamp clicking in Chrome—it should now jump directly to the correct position.[4:18 PM]I tested the code with an mp3 from GitHub and it works okMark McFate  [4:44 PM]Ah, and I'm in Azure Blob Storage.  I'll try the option 1 updates and see what happens.  By the way, Claude has become a good friend of mine, too.  As for the deployment problem...   The Digital-Grinnell/GCCB-template-project has been updated so it now deploys to https://gentle-ground-0283de21e.3.azurestaticapps.net/ in an environement that include TZ: America/Chicago.  If you look at the footer of any page you should see when the last https://gentle-ground-0283de21e.3.azurestaticapps.net/ was built.
+```
+
+And my follow-up...  
+
+```
+Just got around to testing this... Azure Blob Storage is returning the entire object, not the 206 Partial Content that's needed.We also have some CDN space in DigitalOcean Spaces.  I copied one of our .mp3 files there and did some testing... it works BEAUTIFULLY. So I think that errant timestamp jumping within the playback can be easily addressed.  Thank you @Devin Becker (and Claude)!
+```
+
+### Moving .mp3 Files to DigitalOcean
+
+As a result of this test I'm taking step (13-Jan-2026) to relocate all of the project .mp3 files from Azure Blob Storage to DigitalOcean Spaces, specifically to https://cloud.digitalocean.com/spaces/digital-grinnell?path=Georgia-Dentel%2F&renameObject=&type=. 
+
+Note that in that SOS there's both an audio (.mp3) and video (.mp4) copy of the Kit Wall interview for comparative testing.  As of 13-Jan-2026 the project builds 3 copies of the Kit Wall interview, one using the original `dg_1750784116.mp3` audio, and two others that use the corresponding `dg_1750784116.mp4` video.  In the two `.mp4` cases one has a `display_template` value of "video", the other "transcript".     
+
 
 <div style="border: 2px solid black; padding: 12px; border-radius: 6px; background-color: #f9f9f9; font-size: 1.3em; color: red; margin: 3em 1em; text-align: center;">
 <strong>What follows is from the parent project. It may include irrelevant or outdated information!</strong>
