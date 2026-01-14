@@ -1,6 +1,8 @@
 # GCCB-Georgia-Dentel-Project
 
-This project's `main` branch builds https://calm-ocean-061ff161e.1.azurestaticapps.net/ using Azure and GitHub Actions when updated.  
+This project's `main` branch builds https://calm-ocean-061ff161e.1.azurestaticapps.net/ using Azure and GitHub Actions when updated.
+
+<!-- Force rebuild January 14, 2026 to refresh transcript data -->
 
 The Wordpress site for the Georgia Dentel project can be found at https://concertshistory.sites.grinnell.edu/. 
 
