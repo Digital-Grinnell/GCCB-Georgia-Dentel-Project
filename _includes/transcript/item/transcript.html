@@ -13,13 +13,13 @@
     <div class="col-12 col-md-2 timestamp mb-3 small text-center">
       {% if item.timestamp %}
         {% include transcript/standardized-timestamp.html %}
-        {% if av contains "youtube" or av contains "mp3" or av contains "soundcloud" %}
+        {% if av contains "youtube" or av contains "mp3" or av contains "mp4" or av contains "soundcloud" %}
           <button 
             type="button" 
             title="Jump video to {{ timestamp }}"
             class="timestamp-link btn btn-link p-0" 
             data-timestamp="{{ total_sec | strip }}"
-            {% if av contains 'mp3' %}
+            {% if av contains 'mp3' or av contains 'mp4' %}
               onclick="timestampMP3('{{- total_sec -}}');"
             {% elsif av contains 'youtube' %}
               onclick="seekTo({{ total_sec }});"
